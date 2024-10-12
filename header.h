@@ -20,4 +20,4 @@ int deplacerCaisse(char grille[HAUTEUR][LARGEUR], Position *caisse, int dx, int 
 int estGagnant(char grille[HAUTEUR][LARGEUR], Position caisse);
 int estPerdu(char grille[HAUTEUR][LARGEUR], Position caisse);
 
-#endif
+#endif // et end de l'exo <3
