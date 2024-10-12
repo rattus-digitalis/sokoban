@@ -2,9 +2,9 @@
 
 void initialiserGrille(char grille[HAUTEUR][LARGEUR]) {
     for (int i = 0; i < HAUTEUR; i++) {
-        for (int j = 0; j < LARGEUR; j++) {
-            if (i == 0 || i == HAUTEUR - 1 || j == 0 || j == LARGEUR - 1) {
-                grille[i][j] = '#';
+    for (int j = 0; j < LARGEUR; j++) {
+    if (i == 0 || i == HAUTEUR - 1 || j == 0 || j == LARGEUR - 1) {
+        grille[i][j] = '#';
             } else {
                 grille[i][j] = ' ';
             }
@@ -17,8 +17,8 @@ void initialiserGrille(char grille[HAUTEUR][LARGEUR]) {
 
 void afficherGrille(char grille[HAUTEUR][LARGEUR]) {
     for (int i = 0; i < HAUTEUR; i++) {
-        for (int j = 0; j < LARGEUR; j++) {
-            printf("%c ", grille[i][j]);
+    for (int j = 0; j < LARGEUR; j++) {
+        printf("%c ", grille[i][j]);
         }
         printf("\n");
     }
@@ -33,14 +33,15 @@ int deplacerJoueur(char grille[HAUTEUR][LARGEUR], Position *joueur, int dx, int 
         joueur->x = nouvelleX;
         joueur->y = nouvelleY;
         grille[joueur->y][joueur->x] = 'o';
+    
         return 1;
     } else if (grille[nouvelleY][nouvelleX] == 'X') {
-        if (deplacerCaisse(grille, &(Position){nouvelleX, nouvelleY}, dx, dy)) {
-            grille[joueur->y][joueur->x] = ' ';
-            joueur->x = nouvelleX;
-            joueur->y = nouvelleY;
-            grille[joueur->y][joueur->x] = 'o';
-            return 1;
+           if (deplacerCaisse(grille, &(Position){nouvelleX, nouvelleY}, dx, dy)) {
+              grille[joueur->y][joueur->x] = ' ';
+              joueur->x = nouvelleX;
+              joueur->y = nouvelleY;
+              grille[joueur->y][joueur->x] = 'o';
+    return 1;
         }
     }
     return 0;
@@ -55,16 +56,19 @@ int deplacerCaisse(char grille[HAUTEUR][LARGEUR], Position *caisse, int dx, int 
         caisse->x = nouvelleX;
         caisse->y = nouvelleY;
         grille[caisse->y][caisse->x] = 'X';
-        return 1;
+        
+    return 1;
     }
     return 0;
 }
 
 int estGagnant(char grille[HAUTEUR][LARGEUR], Position caisse) {
+    
     return grille[caisse.y][caisse.x] == '*';
 }
 
 int estPerdu(char grille[HAUTEUR][LARGEUR], Position caisse) {
+    
     return (grille[caisse.y + 1][caisse.x] == '#' && grille[caisse.y][caisse.x + 1] == '#') ||
            (grille[caisse.y - 1][caisse.x] == '#' && grille[caisse.y][caisse.x - 1] == '#');
 }
@@ -85,13 +89,14 @@ int main() {
 
     while (1) {
         afficherGrille(grille);
-        if (estGagnant(grille, caisse)) {
-            printf("Vous avez gagné !\n");
-            break;
+    if (estGagnant(grille, caisse)) {
+        printf("Vous avez gagné !\n");
+    
+        break;
         }
         if (estPerdu(grille, caisse)) {
             printf("Vous avez perdu !\n");
-            break;
+        break;
         }
 
         printf("\nEntrez votre mouvement (z: haut, s: bas, q: gauche, d: droite): ");
@@ -100,21 +105,21 @@ int main() {
         int deplacementEffectue = 0;
 
         switch (mouvement) {
-            case 'z':
+        case 'z':
                 deplacementEffectue = deplacerJoueur(grille, &joueur, 0, -1);
-                break;
-            case 's':
+        break;
+        case 's':
                 deplacementEffectue = deplacerJoueur(grille, &joueur, 0, 1);
-                break;
-            case 'q':
+        break;
+        case 'q':
                 deplacementEffectue = deplacerJoueur(grille, &joueur, -1, 0);
-                break;
-            case 'd':
+        break;
+        case 'd':
                 deplacementEffectue = deplacerJoueur(grille, &joueur, 1, 0);
-                break;
-            default:
+        break;
+        default:
                 printf("Mouvement invalide.\n");
-                continue;
+        continue;
         }
 
         if (!deplacementEffectue) {
