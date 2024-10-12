@@ -1,6 +1,10 @@
 #ifndef HEADER_H
 #define HEADER_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 #define LARGEUR 14
 #define HAUTEUR 10
 
